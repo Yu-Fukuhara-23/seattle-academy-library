@@ -26,7 +26,7 @@ public class BooksService {
 
 	/**
 	 * 書籍リストを取得する
-	 *
+	 
 	 * @return 書籍リスト
 	 */
 	public List<BookInfo> getBookList() {
