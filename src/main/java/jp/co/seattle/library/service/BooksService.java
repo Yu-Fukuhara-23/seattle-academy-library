@@ -1,7 +1,5 @@
 package jp.co.seattle.library.service;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import jp.co.seattle.library.dto.BookDetailsInfo;
-import jp.co.seattle.library.dto.BookInfo;
 import jp.co.seattle.library.rowMapper.BookDetailsInfoRowMapper;
-import jp.co.seattle.library.rowMapper.BookInfoRowMapper;
 
 /**
  * 書籍サービス
@@ -28,17 +24,17 @@ public class BooksService {
 	 * 書籍リストを取得する
 	 
 	 * @return 書籍リスト
-	 */
+	 *
 	public List<BookInfo> getBookList() {
-
+	
 		// TODO 書籍名の昇順で書籍情報を取得するようにSQLを修正（タスク３）
 		List<BookInfo> getedBookList = jdbcTemplate.query(
 				"SELECT id, title, author, publisher, publish_date, thumbnail_url, thumbnail_name FROM books ORDER BY title ASC;",
 				new BookInfoRowMapper());
-
+	
 		return getedBookList;
 	}
-
+	
 	/**
 	 * 書籍IDに紐づく書籍詳細情報を取得する
 	 *
@@ -61,7 +57,7 @@ public class BooksService {
 	 */
 	public int registBook(BookDetailsInfo bookInfo) {
 		// TODO 取得した書籍情報を登録し、その書籍IDを返却するようにSQLを修正（タスク４）
-		String sql = "";
+		String sql = "INSERT INTO books(title, author, publisher, publish_date, thumbnail_name, thumbnail_url, isbn, description, reg_date, upd_date) VALUES(?,?,?,?,?,?,?,?,now(),now()) RETURNING id;";
 
 		int bookId = jdbcTemplate.queryForObject(sql, int.class, bookInfo.getTitle(), bookInfo.getAuthor(),
 				bookInfo.getPublisher(), bookInfo.getPublishDate(), bookInfo.getThumbnailName(),
