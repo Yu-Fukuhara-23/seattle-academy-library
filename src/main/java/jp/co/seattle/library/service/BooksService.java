@@ -26,14 +26,14 @@ public class BooksService {
 
 	/**
 	 * 書籍リストを取得する
-	 *
+	 
 	 * @return 書籍リスト
 	 */
 	public List<BookInfo> getBookList() {
 
 		// TODO 書籍名の昇順で書籍情報を取得するようにSQLを修正（タスク３）
 		List<BookInfo> getedBookList = jdbcTemplate.query(
-				"",
+				"SELECT id, title, author, publisher, publish_date, thumbnail_url, thumbnail_name FROM books ORDER BY title ASC;",
 				new BookInfoRowMapper());
 
 		return getedBookList;
