@@ -33,7 +33,7 @@ public class BooksService {
 
 		// TODO 書籍名の昇順で書籍情報を取得するようにSQLを修正（タスク３）
 		List<BookInfo> getedBookList = jdbcTemplate.query(
-				"SELECT id, title, author, publisher, publish_date, thumbnail_url, FROM books ORDER BY title ASC;",
+				"SELECT id, title, author, publisher, publish_date, thumbnail_url FROM books ORDER BY title ASC;",
 				new BookInfoRowMapper());
 
 		return getedBookList;
@@ -76,7 +76,7 @@ public class BooksService {
 	 */
 	public void deleteBook(int bookId) {
 		// TODO 対象の書籍を削除するようにSQLを修正（タスク6）
-		String sql = "DELETE FROM books WHERE id = ?";
+		String sql = "DELETE FROM books WHERE id = ?;";
 		jdbcTemplate.update(sql, bookId);
 	}
 
@@ -99,5 +99,9 @@ public class BooksService {
 					bookInfo.getPublishDate(), bookInfo.getThumbnailName(), bookInfo.getThumbnailUrl(),
 					bookInfo.getIsbn(), bookInfo.getDescription(), bookInfo.getBookId());
 		}
+	}
+	
+	public void PasswordReset(PasswordReset passwordReset) {
+		String sql = "UPDATE users SET password=? WHERE id = ?;";
 	}
 }

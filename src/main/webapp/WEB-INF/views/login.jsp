@@ -32,6 +32,7 @@
             <div class="authorization_navi">
                 <label class="authorization_text">まだアカウントをお持ちでないですか？</label> <a class="authorization_link marker" href="<%=request.getContextPath()%>/newAccount">アカウント作成</a>
             </div>
+            <form method="post" action="PasswordReset">
         </div>
         <footer>
             <div class="copyright">© 2019 Seattle Consulting Co., Ltd. All rights reserved.</div>
