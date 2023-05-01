@@ -28,12 +28,15 @@ public class UsersService {
 	public void registUser(UserInfo userInfo) {
 
 		// SQL生成
-		String sql = "INSERT INTO users (email, password,reg_date,upd_date) VALUES ('" + userInfo.getEmail() + "','"
-				+ userInfo.getPassword() + "',now(),now()" + ")";
+		String sql = "INSERT INTO users (email,password,reg_date,upd_date) VALUES ('" + userInfo.getEmail() + "','"
+				+ userInfo.getPassword() + "',now(),now()" + ");";
 
 		jdbcTemplate.update(sql);
 	}
-
+	public void resetUser(UserInfo userInfo) {
+		String sql = "UPDATE users SET password = ? WHERE email = ?";
+		jdbcTemplate.update(sql, userInfo.getPassword(), userInfo.getEmail());
+	}
 	/**
 	 * ユーザー情報取得
 	 * 
