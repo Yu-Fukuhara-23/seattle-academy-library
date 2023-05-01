@@ -101,4 +101,3 @@ editBook.jsp
  			</div>      
     </main>
 </body>
-</html>
