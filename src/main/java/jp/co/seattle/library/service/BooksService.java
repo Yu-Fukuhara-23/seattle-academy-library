@@ -101,7 +101,5 @@ public class BooksService {
 		}
 	}
 	
-	public void PasswordReset(PasswordReset passwordReset) {
-		String sql = "UPDATE users SET password=? WHERE id = ?;";
-	}
+	
 }
