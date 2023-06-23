@@ -84,6 +84,17 @@
                         </c:if>
                     </div>
                     <div>
+                        <span>ジャンル</span><span class="care care1">任意</span>
+                         <label class="selectbox-005">
+    							<select name="bookGenre">
+    								<option value="firstSelect">選択してください</option>
+        							<option value="小説">小説</option>
+        							<option value="漫画">漫画</option>
+        							<option value="絵本">絵本</option>
+    							</select>
+							</label>
+                    </div>
+                    <div>
                         <span>ISBN</span><span class="care care1">任意</span>
                         <c:if test="${!empty bookInfo}">
                             <input type="text" name="isbn" value="${bookInfo.isbn}">
