@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import jp.co.seattle.library.dto.UserInfo;
 import jp.co.seattle.library.rowMapper.UserCountRowMapper;
+import jp.co.seattle.library.rowMapper.UserCountRowMapper2;
 
 /**
  * Handles requests for the application home page.
@@ -28,12 +29,22 @@ public class UsersService {
 	public void registUser(UserInfo userInfo) {
 
 		// SQL生成
-		String sql = "INSERT INTO users (email, password,reg_date,upd_date) VALUES ('" + userInfo.getEmail() + "','"
-				+ userInfo.getPassword() + "',now(),now()" + ")";
+		String sql = "INSERT INTO users (email, password, shelfPassword, reg_date,upd_date) VALUES ('" + userInfo.getEmail() + "','" 
+				+ userInfo.getPassword() + "','" + userInfo.getShelfPassword() + "',now(),now()" + ")";
 
 		jdbcTemplate.update(sql);
 	}
-
+	
+	// 本棚のログイン(メアドと本棚のパスワードが合致しているかか)
+	 public UserInfo selectUserShelf(String email, String shelfPassword) {
+	  try {
+	   String sql = "SELECT email, shelfpassword FROM users WHERE email = '" + email + "' AND shelfpassword = '" + shelfPassword + "'";
+	   UserInfo selectedUserInfo = jdbcTemplate.queryForObject(sql, new UserCountRowMapper2());
+	   return selectedUserInfo;
+	  } catch (Exception e) {
+	   return null;
+	  }
+	 }
 	/**
 	 * ユーザー情報取得
 	 * 
